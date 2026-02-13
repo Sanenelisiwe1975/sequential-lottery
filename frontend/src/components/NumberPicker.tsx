@@ -95,9 +95,9 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
       </div>
 
       {/* Number grid */}
-      <div className="glass rounded-xl p-6 border border-indigo-200/50">
+      <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
         <h3 className="text-slate-900 font-bold mb-4">Choose Numbers (1-49)</h3>
-        <div className="grid grid-cols-7 gap-2">
+        <div className="grid grid-cols-7 gap-2 pointer-events-auto">
           {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => {
             const isSelected = selectedNumbers.includes(num);
             const position = selectedNumbers.indexOf(num);
@@ -114,7 +114,7 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
                 onClick={() => toggleNumber(num)}
                 disabled={disabled}
                 type="button"
-                className={`relative aspect-square rounded-lg font-bold text-sm transition-all duration-200 ${buttonClass} ${disabledClass}`}
+                className={`relative aspect-square rounded-lg font-bold text-sm transition-all duration-200 ${buttonClass} ${disabledClass} pointer-events-auto z-10`}
               >
                 {num}
                 {isSelected && (
