@@ -47,10 +47,10 @@ export default function RoundInfo({ roundInfo, carryOverBalance, ticketPrice }: 
 
   if (!roundInfo) {
     return (
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white rounded-2xl p-8 shadow-sm">
         <div className="animate-pulse space-y-4">
-          <div className="h-6 bg-gray-200 rounded w-1/2"></div>
-          <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+          <div className="h-8 bg-gray-200 rounded-lg w-1/2"></div>
+          <div className="h-6 bg-gray-200 rounded-lg w-3/4"></div>
         </div>
       </div>
     );
@@ -60,54 +60,61 @@ export default function RoundInfo({ roundInfo, carryOverBalance, ticketPrice }: 
   const isActive = !roundInfo.isDrawn && Number(roundInfo.endTime) > Math.floor(Date.now() / 1000);
 
   return (
-    <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl shadow-2xl p-8 text-white">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold">Round #{roundInfo.roundId?.toString()}</h2>
-        <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-          isActive ? 'bg-green-500' : 'bg-red-500'
+    <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-4xl font-bold text-gray-900">Round #{roundInfo.roundId?.toString()}</h2>
+        <span className={`px-4 py-2 rounded-lg text-sm font-bold ${
+          isActive 
+            ? 'bg-emerald-100 text-emerald-700' 
+            : 'bg-gray-200 text-gray-700'
         }`}>
-          {isActive ? '🟢 Active' : '🔴 Ended'}
+          {isActive ? 'ACTIVE' : 'ENDED'}
         </span>
       </div>
 
       {/* Prize Pool */}
-      <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-4">
-        <div className="text-sm font-medium mb-2 opacity-90">Total Prize Pool</div>
-        <div className="text-5xl font-bold mb-2">
+      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-6 mb-6">
+        <div className="text-sm font-semibold text-gray-600 mb-2">Total Prize Pool</div>
+        <div className="text-5xl font-bold text-gray-900 mb-2">
           {formatEther(prizePool || 0n)} ETH
         </div>
         {carryOverBalance && carryOverBalance > 0n && (
-          <div className="text-sm opacity-75">
-            💰 Includes {formatEther(carryOverBalance)} ETH carry over
+          <div className="text-sm text-gray-700">
+            Includes {formatEther(carryOverBalance)} ETH carry over
           </div>
         )}
       </div>
 
       {/* Round Details Grid */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-          <div className="text-sm opacity-75 mb-1">Ticket Price</div>
-          <div className="text-2xl font-bold">
+        <div className="bg-blue-50 rounded-xl p-4">
+          <div className="text-xs font-semibold text-gray-600 mb-2">Ticket Price</div>
+          <div className="text-3xl font-bold text-gray-900">
             {ticketPrice ? formatEther(ticketPrice) : '0'} ETH
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-          <div className="text-sm opacity-75 mb-1">Time Remaining</div>
-          <div className="text-2xl font-bold">
+        <div className="bg-rose-50 rounded-xl p-4">
+          <div className="text-xs font-semibold text-gray-600 mb-2">Time Remaining</div>
+          <div className="text-3xl font-bold text-gray-900">
             {timeRemaining || '---'}
           </div>
         </div>
-      </div>
 
-      {/* Status Message */}
-      {roundInfo.isDrawn && (
-        <div className="mt-4 bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4">
-          <p className="text-sm font-medium">
-            🎉 This round has been drawn! Check results below.
-          </p>
+        <div className="bg-amber-50 rounded-xl p-4">
+          <div className="text-xs font-semibold text-gray-600 mb-2">Total Sales</div>
+          <div className="text-2xl font-bold text-gray-900">
+            {roundInfo.numbersSold?.toString() || '0'} tickets
+          </div>
         </div>
-      )}
+
+        <div className="bg-emerald-50 rounded-xl p-4">
+          <div className="text-xs font-semibold text-gray-600 mb-2">Round Status</div>
+          <div className="text-lg font-bold text-gray-900">
+            {roundInfo.isDrawn ? 'Drawn' : 'Pending'}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

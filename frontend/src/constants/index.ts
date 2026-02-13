@@ -1,5 +1,5 @@
 // Contract address - UPDATE THIS after deploying your contract
-export const LOTTERY_CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Deployed to localhost
+export const LOTTERY_CONTRACT_ADDRESS = "0x5906fE34a4bcbcFCD76c8DD7b99205226287865c"; // Updated after Sepolia deployment with 3-minute rounds
 
 // Chain configuration
 export const SUPPORTED_CHAINS = {
@@ -9,4 +9,4 @@ export const SUPPORTED_CHAINS = {
 };
 
 // Update this to match your deployment network
-export const ACTIVE_CHAIN = SUPPORTED_CHAINS.LOCALHOST;
+export const ACTIVE_CHAIN = SUPPORTED_CHAINS.SEPOLIA;

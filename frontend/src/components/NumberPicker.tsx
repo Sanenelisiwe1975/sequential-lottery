@@ -52,47 +52,51 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
   return (
     <div className="space-y-4">
       {/* Selected numbers display */}
-      <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-lg shadow-lg">
-        <h3 className="text-white text-lg font-semibold mb-3">Selected Numbers</h3>
-        <div className="flex gap-2 min-h-[60px] items-center flex-wrap">
+      <div className="glass rounded-xl p-6 border border-indigo-200/50">
+        <h3 className="text-slate-900 text-lg font-bold mb-4">📍 Selected Numbers</h3>
+        <div className="flex gap-3 min-h-[70px] items-center flex-wrap">
           {selectedNumbers.length === 0 ? (
-            <p className="text-white/70">Select 7 numbers from 1-49</p>
+            <p className="text-slate-500">Select 7 numbers from 1-49</p>
           ) : (
             selectedNumbers.map((num, idx) => (
               <div
                 key={idx}
-                className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-xl font-bold text-indigo-600 shadow-md"
+                className="relative w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-xl font-bold text-white shadow-lg ring-2 ring-indigo-300"
               >
                 {num}
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-amber-400 text-slate-900 rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                  {idx + 1}
+                </div>
               </div>
             ))
           )}
         </div>
-        <div className="mt-3 text-white/80 text-sm">
+        <div className="mt-4 text-lg font-semibold text-slate-700">
           {selectedNumbers.length}/7 numbers selected
         </div>
       </div>
 
       {/* Quick pick and clear buttons */}
-      <div className="flex gap-2">
+      <div className="flex gap-3">
         <button
           onClick={quickPick}
           disabled={disabled}
-          className="flex-1 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+          className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 disabled:from-slate-400 disabled:to-slate-500 text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-105 disabled:scale-100 shadow-lg"
         >
           🎲 Quick Pick
         </button>
         <button
           onClick={clear}
           disabled={disabled || selectedNumbers.length === 0}
-          className="flex-1 bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+          className="flex-1 bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 disabled:from-slate-400 disabled:to-slate-500 text-white font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-105 disabled:scale-100 shadow-lg"
         >
           🗑️ Clear
         </button>
       </div>
 
       {/* Number grid */}
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="glass rounded-xl p-6 border border-indigo-200/50">
+        <h3 className="text-slate-900 font-bold mb-4">Choose Numbers (1-49)</h3>
         <div className="grid grid-cols-7 gap-2">
           {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => {
             const isSelected = selectedNumbers.includes(num);
@@ -104,17 +108,17 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
                 onClick={() => toggleNumber(num)}
                 disabled={disabled}
                 className={`
-                  relative aspect-square rounded-lg font-semibold text-sm transition-all
+                  relative aspect-square rounded-lg font-bold text-sm transition-all duration-200
                   ${isSelected 
-                    ? 'bg-indigo-600 text-white shadow-lg scale-110' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                    ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg scale-110 ring-2 ring-indigo-400' 
+                    : 'bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-700 shadow-sm hover:shadow-md'
                   }
                   ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
                 `}
               >
                 {num}
                 {isSelected && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-yellow-400 text-xs text-indigo-900 rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-amber-400 to-orange-500 text-xs text-white rounded-full flex items-center justify-center font-bold shadow-md">
                     {position + 1}
                   </span>
                 )}
@@ -125,10 +129,9 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
       </div>
 
       {/* Helper text */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <p className="text-sm text-blue-800">
-          💡 <strong>Tip:</strong> Numbers must match sequentially from position 1 to win. 
-          The order you select matters!
+      <div className="glass rounded-xl p-4 border-l-4 border-indigo-500">
+        <p className="text-sm text-slate-700">
+          💡 <strong>How it works:</strong> Numbers must match sequentially from position 1 to win. The order you select matters!
         </p>
       </div>
     </div>

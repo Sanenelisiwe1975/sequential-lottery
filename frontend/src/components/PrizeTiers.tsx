@@ -9,23 +9,13 @@ export default function PrizeTiers({ prizeTiers, prizePool }: PrizeTiersProps) {
   if (!prizeTiers) return null;
 
   const getTierColor = (matchCount: number) => {
-    if (matchCount === 7) return 'from-yellow-400 to-orange-500';
-    if (matchCount === 6) return 'from-purple-500 to-pink-500';
-    if (matchCount === 5) return 'from-blue-500 to-indigo-500';
-    if (matchCount === 4) return 'from-green-500 to-teal-500';
-    if (matchCount === 3) return 'from-cyan-500 to-blue-400';
-    if (matchCount === 2) return 'from-gray-400 to-gray-500';
-    return 'from-gray-300 to-gray-400';
-  };
-
-  const getTierEmoji = (matchCount: number) => {
-    if (matchCount === 7) return '🏆';
-    if (matchCount === 6) return '💎';
-    if (matchCount === 5) return '⭐';
-    if (matchCount === 4) return '🌟';
-    if (matchCount === 3) return '✨';
-    if (matchCount === 2) return '💫';
-    return '🎯';
+    if (matchCount === 7) return 'bg-yellow-500';
+    if (matchCount === 6) return 'bg-purple-500';
+    if (matchCount === 5) return 'bg-blue-500';
+    if (matchCount === 4) return 'bg-green-500';
+    if (matchCount === 3) return 'bg-cyan-500';
+    if (matchCount === 2) return 'bg-gray-500';
+    return 'bg-gray-400';
   };
 
   const calculateTierPrize = (percentage: number) => {
@@ -35,8 +25,8 @@ export default function PrizeTiers({ prizeTiers, prizePool }: PrizeTiersProps) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h3 className="text-2xl font-bold mb-4">Prize Tiers</h3>
+    <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-200">
+      <h3 className="text-3xl font-bold text-gray-900 mb-2">Prize Tiers</h3>
       <p className="text-sm text-gray-600 mb-6">
         Match numbers sequentially from position 1 to win
       </p>
@@ -49,30 +39,27 @@ export default function PrizeTiers({ prizeTiers, prizePool }: PrizeTiersProps) {
             const matchCount = tier.matchCount;
             const percentage = tier.percentage / 100;
             
-            if (matchCount === 1) return null; // Skip 1 ball (0%)
+            if (matchCount === 1) return null;
 
             return (
               <div
                 key={idx}
-                className={`bg-gradient-to-r ${getTierColor(matchCount)} rounded-lg p-4 text-white`}
+                className={`${getTierColor(matchCount)} rounded-xl p-4 text-white shadow-sm hover:shadow-md transition-shadow`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{getTierEmoji(matchCount)}</span>
-                    <div>
-                      <div className="font-bold text-lg">
-                        {matchCount} Sequential Matches
-                      </div>
-                      <div className="text-sm opacity-90">
-                        {percentage}% of prize pool
-                      </div>
+                  <div>
+                    <div className="font-bold text-lg">
+                      {matchCount} Sequential Match{matchCount !== 1 ? 'es' : ''}
+                    </div>
+                    <div className="text-sm opacity-90 font-medium">
+                      {percentage}% of prize pool
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-2xl font-bold">
                       {calculateTierPrize(tier.percentage)} ETH
                     </div>
-                    <div className="text-xs opacity-75">
+                    <div className="text-xs opacity-80 font-medium">
                       (split among winners)
                     </div>
                   </div>
@@ -82,7 +69,7 @@ export default function PrizeTiers({ prizeTiers, prizePool }: PrizeTiersProps) {
           })}
       </div>
 
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
         <p className="text-sm text-blue-800">
           <strong>Note:</strong> Prizes are split equally among all winners in each tier. 
           Unclaimed prizes automatically carry over to the next round!
