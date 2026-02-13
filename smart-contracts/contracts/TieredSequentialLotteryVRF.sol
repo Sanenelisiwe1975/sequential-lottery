@@ -173,14 +173,6 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
     }
     
     /**
-     * @dev Modifier to allow owner or VRF callback
-     */
-    modifier onlyOwnerOrVRF() {
-        require(msg.sender == owner || msg.sender == address(this), "Only owner or VRF callback");
-        _;
-    }
-    
-    /**
      * @dev Purchase a lottery ticket
      * @param numbers Array of 7 numbers between 1 and 49
      */
