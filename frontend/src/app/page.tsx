@@ -90,7 +90,9 @@ export default function Home() {
                 <p className="text-sm text-gray-600 mt-1">Premium Blockchain Gaming</p>
               </div>
             </div>
-            <ConnectButton />
+            <div className="z-50 pointer-events-auto">
+              <ConnectButton />
+            </div>
           </div>
         </div>
       </header>
