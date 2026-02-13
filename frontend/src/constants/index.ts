@@ -1,5 +1,5 @@
 // Contract address - UPDATE THIS after deploying your contract
-export const LOTTERY_CONTRACT_ADDRESS = "0x7C32805f98c8897C42BB52C57186Fd08Cd2Ec304"; // Chainlink VRF version deployed
+export const LOTTERY_CONTRACT_ADDRESS = "0x1CF2C6caE9FC48656e0F22bE801094C14B28BA39"; // Chainlink VRF version with 3-minute rounds
 
 // Chain configuration
 export const SUPPORTED_CHAINS = {
