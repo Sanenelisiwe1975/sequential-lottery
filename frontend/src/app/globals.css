@@ -98,6 +98,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
 }
 
 .glass-dark {
@@ -106,6 +107,11 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(99, 102, 241, 0.2);
   color: white;
+  pointer-events: auto;
+}
+
+button {
+  pointer-events: auto !important;
 }
 
 .card-shadow {

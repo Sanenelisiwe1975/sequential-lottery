@@ -102,23 +102,23 @@ export default function NumberPicker({ onNumbersChange, disabled }: NumberPicker
             const isSelected = selectedNumbers.includes(num);
             const position = selectedNumbers.indexOf(num);
             
+            const buttonClass = isSelected 
+              ? 'bg-indigo-600 text-white shadow-lg scale-110 ring-2 ring-indigo-400' 
+              : 'bg-slate-200 text-slate-700 shadow-sm hover:bg-slate-300 hover:shadow-md';
+            
+            const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer';
+            
             return (
               <button
                 key={num}
                 onClick={() => toggleNumber(num)}
                 disabled={disabled}
-                className={`
-                  relative aspect-square rounded-lg font-bold text-sm transition-all duration-200
-                  ${isSelected 
-                    ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg scale-110 ring-2 ring-indigo-400' 
-                    : 'bg-gradient-to-br from-slate-100 to-slate-200 hover:from-slate-200 hover:to-slate-300 text-slate-700 shadow-sm hover:shadow-md'
-                  }
-                  ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}
-                `}
+                type="button"
+                className={`relative aspect-square rounded-lg font-bold text-sm transition-all duration-200 ${buttonClass} ${disabledClass}`}
               >
                 {num}
                 {isSelected && (
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-amber-400 to-orange-500 text-xs text-white rounded-full flex items-center justify-center font-bold shadow-md">
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-amber-400 text-xs text-white rounded-full flex items-center justify-center font-bold shadow-md">
                     {position + 1}
                   </span>
                 )}
