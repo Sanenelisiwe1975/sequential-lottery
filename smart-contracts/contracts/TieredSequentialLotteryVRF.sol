@@ -135,7 +135,7 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
         prizeTiers[5] = PrizeTier(6, 2000);   // 6 balls: 20%
         prizeTiers[6] = PrizeTier(7, 3000);   // 7 balls: 30%
         
-        startNewRound(1 days); // Start first round with 1 day duration
+        startNewRound(180); // Start first round with 3 minutes (180 seconds) duration
     }
     
     /**
