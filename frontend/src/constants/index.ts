@@ -1,5 +1,5 @@
 // Contract address - UPDATE THIS after deploying your contract
-export const LOTTERY_CONTRACT_ADDRESS = "0x5906fE34a4bcbcFCD76c8DD7b99205226287865c"; // Updated after Sepolia deployment with 3-minute rounds
+export const LOTTERY_CONTRACT_ADDRESS = "0x7C32805f98c8897C42BB52C57186Fd08Cd2Ec304"; // Chainlink VRF version deployed
 
 // Chain configuration
 export const SUPPORTED_CHAINS = {
