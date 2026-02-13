@@ -143,6 +143,13 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
      * @param duration Duration of the round in seconds
      */
     function startNewRound(uint256 duration) public onlyOwner {
+        _startNewRound(duration);
+    }
+    
+    /**
+     * @dev Internal function to start a new round (called by owner or VRF callback)
+     */
+    function _startNewRound(uint256 duration) internal {
         require(currentRoundId == 0 || lotteryRounds[currentRoundId].isDrawn, "Current round not drawn yet");
         
         currentRoundId++;
@@ -163,6 +170,14 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
         }
         
         emit NewRoundStarted(currentRoundId, ticketPrice);
+    }
+    
+    /**
+     * @dev Modifier to allow owner or VRF callback
+     */
+    modifier onlyOwnerOrVRF() {
+        require(msg.sender == owner || msg.sender == address(this), "Only owner or VRF callback");
+        _;
     }
     
     /**
@@ -271,6 +286,9 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
         
         // Distribute prizes based on tiers
         distributePrizes(roundId, tierCounts);
+        
+        // Automatically start next round with 3 minutes duration
+        startNewRound(180);
     }
     
     /**
