@@ -288,7 +288,7 @@ contract TieredSequentialLotteryVRF is VRFConsumerBaseV2 {
         distributePrizes(roundId, tierCounts);
         
         // Automatically start next round with 3 minutes duration
-        startNewRound(180);
+        _startNewRound(180);
     }
     
     /**
